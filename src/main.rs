@@ -9,5 +9,10 @@ struct Cli {
 }
 
 fn main() {
-    let args = Cli::parse();
+    let pattern = std::env::args().nth(1).expect("no pattern given");
+    let path = std::env::args().nth(2).expect("no path given");
+    let args = Cli {
+        pattern,
+        path: std::path::PathBuf::from(path),
+    };
 }
