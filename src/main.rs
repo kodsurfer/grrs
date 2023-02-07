@@ -1,6 +1,7 @@
 #![allow(unused)]
 
 use clap::{arg, Parser};
+use log::{info, warn};
 
 #[derive(Parser)]
 struct Cli {
@@ -9,6 +10,8 @@ struct Cli {
 }
 
 fn main() {
+    env_logger::init();
+    info!("start up");
     let args = Cli::parse();
     let content = std::fs::read_to_string(&args.path).expect("could not read file");
 
@@ -17,4 +20,5 @@ fn main() {
             println!("{}", line);
         }
     }
+    info!("ended");
 }
