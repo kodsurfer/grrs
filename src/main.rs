@@ -15,14 +15,21 @@ fn main() {
     let args = Cli::parse();
     let content = std::fs::read_to_string(&args.path).expect("could not read file");
 
-    find_matches(&args, content);
+    find_matches(&content, &args.pattern, &mut std::io::stdout());
     info!("ended");
 }
 
-fn find_matches(args: &args, content: String) {
+fn find_matches(content: &str, pattern: &str, mut writer: impl std::io::Write) {
     for line in content.lines() {
-        if line.contains(&args.pattern) {
+        if line.contains(pattern) {
             println!("{}", line);
         }
     }
+}
+
+#[test]
+fn find_a_match() {
+    let mut res = Vec::new();
+    find_matches("pam param pam", "param", &mut res);
+    assert_eq!()
 }
