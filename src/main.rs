@@ -22,7 +22,7 @@ fn main() {
 fn find_matches(content: &str, pattern: &str, mut writer: impl std::io::Write) {
     for line in content.lines() {
         if line.contains(pattern) {
-            println!("{}", line);
+            writeln!(writer, "{}", line);
         }
     }
 }
@@ -31,5 +31,5 @@ fn find_matches(content: &str, pattern: &str, mut writer: impl std::io::Write) {
 fn find_a_match() {
     let mut res = Vec::new();
     find_matches("pam param pam", "param", &mut res);
-    assert_eq!()
+    assert_eq!(res, b"pam param pam\n")
 }
